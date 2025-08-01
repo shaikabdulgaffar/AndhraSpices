@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if cart_items and cart_items|length > 0 %}
+<div class="cart-list" style="max-width:600px;margin:2em auto;display:flex;flex-direction:column;align-items:center;">
+    <h2>Your Cart</h2>
+    <table style="width:100%;background:#fff;border-radius:10px;box-shadow:0 2px 12px #eee;">
+        <tr>
+            <th style="text-align:left;padding:8px;">Item</th>
+            <th style="text-align:center;padding:8px;">Qty</th>
+            <th style="text-align:right;padding:8px;">Price</th>
+            <th style="text-align:right;padding:8px;">Total</th>
+        </tr>
+        {% for entry in cart_items %}
+        <tr>
+            <td style="padding:8px;">
+                <img src="{{ entry.item.image_url }}" alt="{{ entry.item.name }}" style="width:40px;height:40px;object-fit:cover;border-radius:5px;vertical-align:middle;margin-right:8px;">
+                {{ entry.item.name }}
+            </td>
+            <td style="text-align:center;padding:8px;">
+                <button class="qty-btn" onclick="updateQty({{ entry.item.id }}, -1)" {% if entry.qty == 1 %}disabled{% endif %}>-</button>
+                <span id="qty-{{ entry.item.id }}">{{ entry.qty }}</span>
+                <button class="qty-btn" onclick="updateQty({{ entry.item.id }}, 1)">+</button>
+                <button class="qty-btn" style="background:none;border:none;color:#d00;margin-left:6px;" title="Delete" onclick="deleteItem({{ entry.item.id }})">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
+            <td style="text-align:right;padding:8px;">₹{{ entry.item.price }}</td>
+            <td style="text-align:right;padding:8px;">₹{{ "%.2f"|format(entry.item.price * entry.qty) }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3" style="text-align:right;padding:8px;font-weight:bold;">Delivery Charges</td>
+            <td style="text-align:right;padding:8px;font-weight:bold;">₹40.00</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align:right;padding:8px;font-weight:bold;">Total</td>
+            <td style="text-align:right;padding:8px;font-weight:bold;">₹{{ "%.2f"|format(total + 40) }}</td>
+        </tr>
+    </table>
+    <button id="place-order-btn" class="btn" style="margin-top:2em;padding:1em 2.5em;font-size:1.2em;background:#fa8500;color:#fff;border:none;border-radius:8px;box-shadow:0 2px 8px #fa850033;transition:background 0.2s;cursor:pointer;">
+        <i class="fa fa-shopping-bag"></i> Place Order
+    </button>
+    <div id="order-success-animation" style="display:none;align-items:center;flex-direction:column;margin-top:2em;">
+        <div class="tick-animation">
+            <svg width="80" height="80">
+                <circle cx="40" cy="40" r="36" stroke="#4BB543" stroke-width="4" fill="none"/>
+                <polyline points="24,44 36,56 56,32" style="fill:none;stroke:#4BB543;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;" id="tick-mark"/>
+            </svg>
+        </div>
+        <div style="color:#4BB543;font-size:1.3em;font-weight:bold;margin-top:1em;">Order Placed!</div>
+    </div>
+</div>
+<script>
+function updateQty(itemId, delta) {
+    fetch("/update_cart", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "item_id=" + itemId + "&delta=" + delta
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success) {
+            document.getElementById('cart-count').innerText = data.cart_count;
+            location.reload();
+        }
+    });
+}
+function deleteItem(itemId) {
+    fetch("/update_cart", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "item_id=" + itemId + "&delta=delete"
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success) {
+            document.getElementById('cart-count').innerText = data.cart_count;
+            location.reload();
+        }
+    });
+}
+
+// Place Order Animation
+document.getElementById('place-order-btn').onclick = function(e) {
+    e.preventDefault();
+    // Check login status from backend
+    {% if not session.get('user_id') %}
+        window.location.href = "{{ url_for('login') }}";
+        return;
+    {% endif %}
+    
+    this.style.display = 'none';
+    var anim = document.getElementById('order-success-animation');
+    anim.style.display = 'flex';
+    
+    // CSS animations will handle the rest automatically
+    setTimeout(function() {
+        fetch("/clear_cart", {
+            method: "POST"
+        }).then(() => {
+            document.getElementById('cart-count').innerText = 0;
+        });
+    }, 1200);
+};
+</script>
+{% else %}
+<div class="cart-empty">
+    <img src="{{ url_for('static', filename='images/empty_cart.png') }}" alt="empty cart">
+    <h2>No Order Yet!</h2>
+    <p>Your cart is empty. Add something from the menu.</p>
+    <button class="btn" onclick="window.location.href='{{ url_for('index') }}'">Order Now</button>
+</div>
+{% endif %}
+{% endblock %}

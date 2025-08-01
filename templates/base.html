@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Andhra Spice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Andhra Spices logo featuring stylized spices and Telugu text Andhra Ruchulu, set against a vibrant background evoking warmth and hospitality" class="logo">
+            <span class="brand">Andhra Spices - ఆంధ్ర రుచులు</span>
+            <nav>
+                <a href="{{ url_for('index') }}"><i class="fa fa-home"></i> Home</a>
+                <a href="{{ url_for('cart') }}">
+                    <i class="fa fa-shopping-cart"></i> Cart
+                    <span id="cart-count">{{ (session.get('cart') or {})|length }}</span>
+                </a>
+                <div class="account-dropdown">
+                    <a href="#" id="account-link"><i class="fa fa-user"></i> Account <i class="fa fa-caret-down"></i></a>
+                    <div class="account-menu" id="account-menu" style="display:none;">
+                        {% if session.get('user_id') %}
+                            <div class="account-menu-inner">
+                                <div class="user-info-row name">
+                                    <i class="fa fa-user-circle"></i>{{ user.fullname }}
+                                </div>
+                                <div class="user-info-row">
+                                    <i class="fa fa-envelope"></i>{{ user.email }}
+                                </div>
+                                <div class="user-info-row">
+                                    <i class="fa fa-phone"></i>{{ user.mobile }}
+                                </div>
+                                <div class="user-info-row">
+                                    <i class="fa fa-map-marker-alt"></i>{{ user.address }}
+                                </div>
+                                <a href="{{ url_for('logout') }}" class="btn">
+                                    <i class="fa fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="account-menu-inner">
+                                <a href="{{ url_for('login') }}" class="btn" style="margin:0;">
+                                    <i class="fa fa-sign-in-alt"></i> Login
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h1>Andhra Spices</h1>
+                    <p>Authentic flavors, delivered fresh to your doorstep. Experience the best of Andhra cuisine.</p>
+                    <div class="socials">
+                        <a href="#" aria-label="Facebook"><img src="{{ url_for('static', filename='images/facebook.png') }}" /></a>
+                        <a href="#" aria-label="Instagram"><img src="{{ url_for('static', filename='images/instagram.png') }}" /></a>
+                        <a href="#" aria-label="Twitter"><img src="{{ url_for('static', filename='images/twitter.png') }}" /></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Products</h4>
+                    <a href="{{ url_for('index') }}"><i class="fa fa-utensils"></i> Restaurants</a>
+                    <a href="#"><i class="fa fa-list"></i> Menu</a>
+                    <a href="#"><i class="fa fa-tag"></i> Pricing</a>
+                    <a href="#"><i class="fa fa-gift"></i> Offers</a>
+                </div>
+                <div class="footer-column">
+                    <h4>About us</h4>
+                    <a href="#"><i class="fa fa-info-circle"></i> About Andhra Spices</a>
+                    <a href="#"><i class="fa fa-envelope"></i> Contact us</a>
+                    <a href="#"><i class="fa fa-briefcase"></i> Careers</a>
+                    <a href="#"><i class="fa fa-blog"></i> Blog</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="#"><i class="fa fa-question-circle"></i> Help Center</a>
+                    <a href="#"><i class="fa fa-shield-alt"></i> Safety</a>
+                    <a href="#"><i class="fa fa-file-contract"></i> Terms</a>
+                    <a href="#"><i class="fa fa-user-secret"></i> Privacy</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Get in touch</h4>
+                    <p><i class="fa fa-question"></i> Questions or feedback?</p>
+                    <p><i class="fa fa-heart"></i> We'd love to hear from you</p>
+                    <a href="mailto:info@andhraspices.com"><i class="fa fa-envelope"></i> info@andhraspices.com</a>
+                    <a href="tel:+1234567890"><i class="fa fa-phone"></i> +123 456 7890</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="width:100%;text-align:center;">&copy; 2025 Andhra Spices. All rights reserved. Made with ❤️</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var link = document.getElementById('account-link');
+    var menu = document.getElementById('account-menu');
+    if(link && menu) {
+        link.onclick = function(e) {
+            e.preventDefault();
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        };
+        document.addEventListener('click', function(e) {
+            if (!link.contains(e.target) && !menu.contains(e.target)) {
+                menu.style.display = "none";
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

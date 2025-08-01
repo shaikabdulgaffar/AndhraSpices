@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="login-container">
+    <form method="post">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="website" class="logo">
+        <h2 class="form-title">Signup</h2>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <input type="text" name="fullname" placeholder="Full Name" required>
+        <input type="text" name="mobile" placeholder="Mobile Number" required>
+        <input type="text" name="address" placeholder="Address" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button class="btn" type="submit">Signup</button>
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login Here</a></p>
+    </form>
+</div>
+{% endblock %}

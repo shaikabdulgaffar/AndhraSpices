@@ -1,0 +1,601 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f8fafc;
+}
+header, footer {
+    background: #fff;
+    padding: 1em;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+.logo { 
+    height: 50px; 
+    margin-right: 10px;
+}
+.brand {
+    color: #fa8500;
+    font-weight: bold;
+    font-size: 1.5em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+nav {
+    display: flex;
+    align-items: center;
+    gap: 0.2em; /* Pehle 0.5em tha, ab kam */
+}
+nav a {
+    margin: 0 0.1em; /* Pehle 0.25em tha, ab kam */
+    color: #333;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 0.15em 0.4em;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+nav .btn {
+    margin: 0 0.25em;      /* Button ka gap bhi kam */
+    background: #fa8500;
+    color: #fff;
+    padding: 0.5em 1.2em;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.banner {
+    position: relative;
+    margin: 2em auto;
+    width: 80%; /* Reduced width for a professional look */
+    max-width: 900px; /* Optional: set a max width */
+    min-width: 320px;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px #e0e0e0;
+    overflow: hidden;
+    background: #fff;
+}
+.banner-carousel {
+    margin: 2em auto !important;
+    width: 100%;
+    max-width: 1125px;   /* Pehle 1200px tha, ab kam */
+    min-width: 320px;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px #e0e0e0;
+    overflow: hidden;
+    background: #fff;
+    display: block !important;
+}
+.banner-img {
+    width: 100% !important;
+    height: 260px !important;   /* Pehle 380px tha, ab kam */
+    object-fit: cover;
+    display: block;
+    border-radius: 18px;
+}
+.banner-text {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    color: #fff;
+}
+.banner-text h2 { margin: 0; }
+.banner-text .offer {
+    background: #fff;
+    color: #fa8500;
+    border-radius: 50%;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+.restaurant-list {
+    max-width: 1200px;
+    margin: 0 auto 2em auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em; /* Pehle 1em tha, ab 1.5em kar diya */
+    justify-content: center;
+}
+.restaurant-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px #eee;
+    width: 240px;
+    text-align: center;
+    padding: 1.2em 1em 1.5em 1em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none !important;
+    color: inherit;
+    margin-bottom: 10px; /* Pehle 5px tha, ab 10px kar diya */
+}
+.restaurant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px rgba(250, 133, 0, 0.15);
+    border: 1px solid rgba(250, 133, 0, 0.3);
+}
+.restaurant-card * {
+    text-decoration: none !important;
+}
+.restaurant-card h2 {
+    text-decoration: none !important;
+}
+.restaurant-card:hover,
+.restaurant-card:focus {
+    text-decoration: none !important;
+}
+.restaurant-card img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 0.7em;
+    transition: box-shadow 0.2s;
+}
+.restaurant-card:hover img {
+    box-shadow: 0 4px 16px #fa850033;
+}
+.restaurant-card h2 {
+    font-size: 1.25em;
+    color: #222;
+    margin: 0.5em 0 0.2em 0;
+    font-weight: 600;
+}
+.restaurant-card h2 a,
+.restaurant-card a {
+    text-decoration: none !important;
+    color: inherit;
+    transition: color 0.2s;
+}
+.restaurant-card h2 a:hover,
+.restaurant-card a:hover {
+    color: #fa8500;
+    text-decoration: none;
+}
+.restaurant-card p {
+    color: #666;
+    font-size: 1em;
+    margin: 0 0 0.5em 0;
+}
+.restaurant-card .rating {
+    color: #fa8500;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.login-container {
+    width: 350px;
+    margin: 2em auto;
+    background: #fff;
+    padding: 2em;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px #ddd;
+    text-align: center;
+}
+.login-container .brand {
+    color: #fa8500;
+    font-size: 1.8em;
+}
+.login-container input {
+    width: 100%;
+    margin: 1em 0;
+    padding: 0.8em;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    background: #f0f4f8;
+}
+.login-container .btn {
+    width: 100%;
+    background: #fa8500;
+    color: #fff;
+    border-radius: 7px;
+    border: none;
+    padding: 0.8em;
+    font-size: 1em;
+}
+.login-container a {
+    color: #6c3483; /* ya apni pasand ka color */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.login-container a:hover {
+    color: #fa8500;
+    text-decoration: underline; /* hover pe underline chahiye toh, warna hata dein */
+}
+.restaurant-header {
+    display: flex;
+    background: #222;
+    color: #fff;
+    padding: 2em;
+    border-radius: 10px;
+    margin-bottom: 2em;
+}
+.restaurant-header img {
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 2em;
+}
+.menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    justify-content: center;
+}
+.menu-card {
+    background: #fff;
+    border-radius: 10px;
+    width: 220px;
+    box-shadow: 0 2px 12px #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    transition: all 0.3s ease; /* Smooth transition add kiya */
+    position: relative;
+    overflow: hidden;
+}
+.menu-card:hover {
+    transform: translateY(-5px); /* Footer jaise translateY */
+    box-shadow: 0 8px 32px rgba(250, 133, 0, 0.15); /* Footer jaise box-shadow */
+    border: 1px solid rgba(250, 133, 0, 0.3); /* Footer jaise border */
+}
+.menu-card img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.menu-card .add-btn {
+    background: #fff;
+    color: #fa8500;
+    border: 1px solid #fa8500;
+    padding: 0.3em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.6em;
+}
+.add-btn.added {
+    background: #4BB543;
+    color: #fff;
+    border: 1px solid #4BB543;
+    cursor: pointer;
+}
+.cart-empty {
+    margin: 3em auto;
+    text-align: center;
+}
+.cart-empty img {
+    width: 120px;
+    margin-bottom: 1em;
+}
+.cart-empty .btn {
+    background: #fa8500;
+    color: #fff;
+    border-radius: 7px;
+    border: none;
+    padding: 1em 2em;
+    font-size: 1em;
+}
+.footer-content {
+    background: #222;  
+    color: #fff;
+    padding: 2em 1.5em 1.5em; /* Pehle 3em 2em 2em tha, ab kam */
+    border-top: 1px solid #e9ecef;
+}
+.footer-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23ffffff" opacity="0.02"/><circle cx="80" cy="80" r="1" fill="%23ffffff" opacity="0.02"/><circle cx="40" cy="60" r="1" fill="%23ffffff" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+}
+.footer-top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1.2fr 1fr 1.4fr; /* About Us column (3rd) ko 1fr se 1.2fr banaya */
+    gap: 1.5em;
+    max-width: 1200px;
+    margin: 0 auto 1.5em;
+}
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.footer-brand .logo {
+    height: 40px;
+    margin-bottom: 12px;
+    display: none; /* Logo hide kar dete hain */
+}
+.footer-brand .brand {
+    color: #fa8500;
+    font-weight: 600;
+    font-size: 1.3em;
+    margin-bottom: 8px;
+    display: block; /* Brand text show karte hain */
+}
+.footer-brand p {
+    color: #fff;
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 220px; /* Pehle 280px tha, ab kam */
+}
+.footer-brand .socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+.footer-brand .socials img {
+    width: 30px;
+    height: 30px;
+    filter: none;
+}
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2em;
+}
+.footer-column {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.2em 1em;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.footer-column:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(250, 133, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(250, 133, 0, 0.15);
+}
+.footer-column h4 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 1em;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.footer-column h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, #fa8500, #ff9f40);
+    border-radius: 1px;
+}
+.footer-column a {
+    display: flex; /* Flex layout for icon + text */
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 12px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+}
+.footer-column a i {
+    margin-right: 8px; /* Icon aur text ke beech space */
+    width: 16px; /* Icon width consistent rakhne ke liye */
+}
+.footer-column a:hover {
+    color: #fa8500;
+}
+.footer-column p {
+    color: #fff;
+    margin: 8px 0;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+.footer-bottom {
+    border-top: 1px solid #e9ecef;
+    padding-top: 20px; /* Pehle 25px tha, ab kam */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.footer-bottom p {
+    color: #fff;
+    margin: 0;
+    font-size: 0.85em;
+}
+.footer-bottom .socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.footer-bottom .socials a {
+    width: 36px;
+    height: 36px;
+    background: #495057;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+.footer-bottom .socials a:hover {
+    background: #fa8500;
+    transform: translateY(-2px);
+}
+.footer-bottom .socials img {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1);
+}
+
+/* Responsive design for footer */
+@media (max-width: 768px) {
+    .footer-content {
+        padding: 2em 1em 1.5em;
+    }
+    
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2em;
+        text-align: center;
+    }
+    
+    .footer-brand {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+section > h1 {
+    text-align: center;
+    color: #fa8500;
+    font-size: 2.2em;
+    margin: 1.5em 0 1em 0;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    margin-bottom: 24px;
+    background: transparent !important; /* Ensure no background */
+}
+.carousel-dots .dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #eee;
+    display: inline-block;
+    transition: background 0.3s, transform 0.3s;
+    box-shadow: 0 2px 8px #fa850022;
+}
+.carousel-dots .dot.active {
+    background: #fa8500;
+    transform: scale(1.25);
+    box-shadow: 0 2px 12px #fa850044;
+}
+.menu-name-row {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.7em;
+    margin-bottom: 0.2em;
+}
+.menu-name {
+    font-weight: 600;
+    color: #222;
+    font-size: 1.08em;
+    letter-spacing: 0.2px;
+}
+.menu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.5em;
+}
+.menu-info {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+.menu-price {
+    color: #222;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+.menu-rating {
+    color: #fa8500;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.menu-card .add-btn {
+    margin-top: 0;
+}
+.account-dropdown {
+    position: relative;
+}
+.account-menu {
+    position: absolute;
+    top: 100%;
+    right: 0; /* Left se right kar diya */
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    min-width: 200px;
+    z-index: 1000;
+    margin-top: 5px;
+}
+.account-menu-inner {
+    padding: 1em;
+}
+.user-info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: #666;
+}
+.user-info-row.name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+}
+/* Order Success Animation */
+.tick-animation {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tick-animation svg {
+    transform: scale(1);
+    animation: pop-in 0.5s ease-out;
+}
+.tick-animation svg circle {
+    stroke-dasharray: 226;
+    stroke-dashoffset: 226;
+    animation: circle-draw 0.8s ease-out forwards;
+}
+#tick-mark {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: tick-draw 0.5s ease-out 0.3s forwards;
+}
+@keyframes pop-in {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+@keyframes circle-draw {
+    to { stroke-dashoffset: 0; }
+}
+@keyframes tick-draw {
+    to { stroke-dashoffset: 0; }
+}

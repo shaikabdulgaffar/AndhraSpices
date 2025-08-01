@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="banner-carousel">
+    <img id="carousel-img" src="{{ url_for('static', filename='images/carousel-images-jammu-special.jpg') }}" alt="Banner" class="banner-img">
+</div>
+<div class="carousel-dots" id="carousel-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+</div>
+<section>
+    <h1>Popular Restaurants</h1>
+    <div class="restaurant-list">
+        {% for r in restaurants %}
+        <a href="{{ url_for('restaurant', restaurant_id=r.id) }}" class="restaurant-card">
+            <img src="{{ r.image_url }}" alt="{{ r.name }}">
+            <h2>{{ r.name }}</h2>
+            <p>{{ r.cuisine }}</p>
+            <span class="rating">★ {{ r.rating }}</span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+<script>
+    const images = [
+        "{{ url_for('static', filename='images/carousel-images-jammu-special.jpg') }}",
+        "{{ url_for('static', filename='images/carousel-images-north-indian-special.jpg') }}",
+        "{{ url_for('static', filename='images/carousel-images-rajasthani-special.jpg') }}",
+        "{{ url_for('static', filename='images/carousel-images-uttar-pradesh-special.jpg') }}"
+    ];
+    let idx = 0;
+    const dots = document.querySelectorAll('#carousel-dots .dot');
+    setInterval(() => {
+        idx = (idx + 1) % images.length;
+        document.getElementById('carousel-img').src = images[idx];
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === idx);
+        });
+    }, 2500);
+</script>
+{% endblock %}

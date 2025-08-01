@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="restaurant-header">
+    <img src="{{ restaurant.image_url }}" alt="{{ restaurant.name }}">
+    <div>
+        <h2>{{ restaurant.name }}</h2>
+        <p>{{ restaurant.cuisine }}</p>
+        <span>★ {{ restaurant.rating }}</span>
+    </div>
+</div>
+<div class="menu-list">
+    {% for item in menu %}
+    <div class="menu-card">
+        <img src="{{ item.image_url }}" alt="{{ item.name }}">
+        <div class="menu-name-row">
+            <span class="menu-name">{{ item.name }}</span>
+        </div>
+        <div class="menu-row">
+            <div class="menu-info">
+                <span class="menu-price">₹{{ item.price }}</span>
+                <span class="menu-rating">★ {{ item.rating }}</span>
+            </div>
+            <button class="add-btn" id="add-btn-{{ item.id }}" data-itemid="{{ item.id }}">Add</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<script>
+document.querySelectorAll('.add-btn').forEach(function(btn) {
+    btn.onclick = function() {
+        const itemId = btn.dataset.itemid;
+        if (btn.classList.contains('added')) {
+            // Remove from cart
+            fetch("/update_cart", {
+                method: "POST",
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                body: "item_id=" + itemId + "&delta=delete"
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    document.getElementById('cart-count').innerText = data.cart_count;
+                    btn.innerText = "Add";
+                    btn.classList.remove('added');
+                    btn.disabled = false;
+                }
+            });
+        } else {
+            // Add to cart
+            fetch("/add_to_cart", {
+                method: "POST",
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                body: "item_id=" + itemId
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    document.getElementById('cart-count').innerText = data.cart_count;
+                    btn.innerText = "Added";
+                    btn.classList.add('added');
+                    btn.disabled = false;
+                }
+            });
+        }
+    };
+});
+
+// On page load, mark already added items as "Added"
+window.onload = function() {
+    {% if session.get('cart') %}
+        const cart = {{ session.get('cart')|tojson }};
+        Object.keys(cart).forEach(function(itemId) {
+            var btn = document.getElementById('add-btn-' + itemId);
+            if(btn) {
+                btn.innerText = "Added";
+                btn.classList.add('added');
+                btn.disabled = false;
+            }
+        });
+    {% endif %}
+};
+</script>
+{% endblock %}
